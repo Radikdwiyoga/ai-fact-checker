@@ -164,6 +164,58 @@ async function fetchRealtimeSearchResults(query: string): Promise<Array<{ title:
   }
 }
 
+async function getEnhancedSearchResults(text: string): Promise<Array<{ title: string; url: string; snippet: string }>> {
+  try {
+    const rawQuery = cleanSearchQuery(text);
+    if (!rawQuery) return [];
+    
+    const queriesToSearch = [rawQuery];
+    
+    // Create a keyword version to bypass overly long strings or complex punctuation
+    const keywordQuery = rawQuery
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g, "")
+      .split(/\s+/)
+      .slice(0, 8)
+      .join(" ");
+      
+    // If the keyword version is different and valid, add it
+    if (keywordQuery && keywordQuery !== rawQuery) {
+      queriesToSearch.push(keywordQuery);
+    }
+    
+    // Inject the current year 2026 to ensure fresh and relevant news (e.g. "Inggris vs Norwegia 2026")
+    const currentYear = new Date().getFullYear().toString(); // "2026"
+    if (!rawQuery.includes(currentYear) && keywordQuery) {
+      queriesToSearch.push(`${keywordQuery} ${currentYear}`);
+    }
+    
+    // Deduplicate query list
+    const uniqueQueries = Array.from(new Set(queriesToSearch.filter(q => q.length > 3)));
+    
+    console.log(`[API Search] Triggering enhanced parallel search queries:`, uniqueQueries);
+    
+    // Run searches in parallel
+    const searchPromises = uniqueQueries.map(q => fetchRealtimeSearchResults(q));
+    const searchResultsArrays = await Promise.all(searchPromises);
+    
+    // Merge and deduplicate results by URL
+    const mergedResults: Array<{ title: string; url: string; snippet: string }> = [];
+    for (const resultsArray of searchResultsArrays) {
+      for (const item of resultsArray) {
+        if (item.url && !mergedResults.some(r => r.url === item.url)) {
+          mergedResults.push(item);
+        }
+      }
+    }
+    
+    console.log(`[API Search] Successfully retrieved ${mergedResults.length} unique search results.`);
+    return mergedResults.slice(0, 15); // Return top 15 results
+  } catch (err: any) {
+    console.error("getEnhancedSearchResults error:", err.message || err);
+    return [];
+  }
+}
+
 // ----------------------------------------------------
 // HEURISTIC FACT-CHECK ENGINE (ROBUST FALLBACK ON API EXHAUSTION)
 // ----------------------------------------------------
@@ -639,8 +691,7 @@ app.post("/api/analyze", async (req, res) => {
   // Pre-fetch real-time search results to provide reliable grounding and robust fallback
   let searchResults: Array<{ title: string; url: string; snippet: string }> = [];
   try {
-    const query = cleanSearchQuery(text);
-    searchResults = await fetchRealtimeSearchResults(query);
+    searchResults = await getEnhancedSearchResults(text);
   } catch (searchErr) {
     console.warn("Pre-fetching search results failed:", searchErr);
   }
@@ -648,7 +699,17 @@ app.post("/api/analyze", async (req, res) => {
   try {
     const ai = getGeminiClient();
 
+    const currentDate = new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta", dateStyle: "full", timeStyle: "short" });
+    const currentDateEN = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta", dateStyle: "full", timeStyle: "short" });
+
     const systemPrompt = `You are VerifikasiAI, an elite, objective, and extremely precise Fact-Checking Assistant specializing in fake news detection, claim verification, propaganda analysis, and media bias detection.
+
+CRITICAL TEMPORAL CONTEXT:
+- Today's date is: ${currentDate} (WIB) / ${currentDateEN} (WIB).
+- The current year is 2026.
+- Today is in the year 2026. This means the 2026 FIFA World Cup matches (played in June & July 2026) are real-time CURRENT events or historical facts that have already completed. Do NOT state that the 2026 World Cup has not started yet or that the year is 2024.
+- If search results indicate England won against Norway (or other real results), you MUST accept this as a valid, confirmed fact. Treat active search outcomes as the absolute source of truth.
+
 You must use your googleSearch tool to perform live real-time Google searches on the core claim to check if it has been verified, debunked, or covered by official fact-checking institutions (such as Mafindo/TurnBackHoax, CekFakta, Kompas Tren, Tempo CekFakta, Liputan6 Cek Fakta, Snopes, AFP Fact Check, Reuters Fact Check, AP).
 You must remain absolutely objective and neutral. Always ground your analysis and rating on solid, verifiable evidence rather than speculative pre-trained knowledge.`;
 
@@ -868,8 +929,7 @@ app.post("/api/extension/analyze", async (req, res) => {
   // Pre-fetch real-time search results to provide reliable grounding and robust fallback
   let searchResults: Array<{ title: string; url: string; snippet: string }> = [];
   try {
-    const query = cleanSearchQuery(text);
-    searchResults = await fetchRealtimeSearchResults(query);
+    searchResults = await getEnhancedSearchResults(text);
   } catch (searchErr) {
     console.warn("Extension pre-fetching search results failed:", searchErr);
   }
@@ -877,7 +937,17 @@ app.post("/api/extension/analyze", async (req, res) => {
   try {
     const ai = getGeminiClient();
 
+    const currentDate = new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta", dateStyle: "full", timeStyle: "short" });
+    const currentDateEN = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta", dateStyle: "full", timeStyle: "short" });
+
     const systemPrompt = `You are VerifikasiAI, an elite, objective, and extremely precise Fact-Checking Assistant specializing in fake news detection, claim verification, and browser security flagging.
+
+CRITICAL TEMPORAL CONTEXT:
+- Today's date is: ${currentDate} (WIB) / ${currentDateEN} (WIB).
+- The current year is 2026.
+- Today is in the year 2026. This means the 2026 FIFA World Cup matches (played in June & July 2026) are real-time CURRENT events or historical facts that have already completed. Do NOT state that the 2026 World Cup has not started yet or that the year is 2024.
+- If search results indicate England won against Norway (or other real results), you MUST accept this as a valid, confirmed fact. Treat active search outcomes as the absolute source of truth.
+
 You must use your googleSearch tool to run real-time Google searches on the core claim to verify its accuracy against reputable fact-checking websites and reliable news sources.`;
 
     const searchResultsText = searchResults.length > 0 
