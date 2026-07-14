@@ -105,55 +105,68 @@ function cleanSearchQuery(text: string): string {
 async function fetchRealtimeSearchResults(query: string): Promise<Array<{ title: string; url: string; snippet: string }>> {
   try {
     const encodedQuery = encodeURIComponent(query);
-    const url = `https://html.duckduckgo.com/html/?q=${encodedQuery}`;
+    // Simple fast detection for Indonesian terms to request Indonesian localized news
+    const isIndonesian = /dan\b|yang\b|dengan\b|untuk\b|adalah\b|pada\b|dari\b|dalam\b|bisa\b|akan\b|telah\b|sudah\b|belum\b|ini\b|itu\b|ke\b|di\b|vs\b|menang\b|kalah\b|timnas\b|inggris\b|norwegia\b/i.test(query);
+    
+    const url = isIndonesian
+      ? `https://news.google.com/rss/search?q=${encodedQuery}&hl=id&gl=ID&ceid=ID:id`
+      : `https://news.google.com/rss/search?q=${encodedQuery}`;
+
     const res = await fetch(url, {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
       }
     });
     if (!res.ok) {
-      console.warn(`DDG HTML search returned status ${res.status}`);
+      console.warn(`Google News RSS search returned status ${res.status}`);
       return [];
     }
-    const html = await res.text();
+    const xml = await res.text();
     
     const results: Array<{ title: string; url: string; snippet: string }> = [];
-    const blocks = html.split("class=\"result results_links");
+    const items = xml.split("<item>");
     
-    for (let i = 1; i < blocks.length; i++) {
-      const block = blocks[i];
+    for (let i = 1; i < items.length; i++) {
+      const item = items[i];
       
       // 1. Extract Title
       let title = "";
-      const titleMatch = block.match(/class="result__a"[^>]*>([\s\S]*?)<\/a>/);
+      const titleMatch = item.match(/<title>([\s\S]*?)<\/title>/);
       if (titleMatch) {
-        title = titleMatch[1].replace(/<[^>]*>/g, "").trim();
+        title = titleMatch[1]
+          .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+          .replace(/<[^>]*>/g, "")
+          .trim();
       }
       
       // 2. Extract URL
       let linkUrl = "";
-      const urlMatch = block.match(/href="([^"]+)"/);
-      if (urlMatch) {
-        let rawLink = urlMatch[1];
-        if (rawLink.includes("uddg=")) {
-          const parts = rawLink.split("uddg=");
-          if (parts.length > 1) {
-            const encodedUrl = parts[1].split("&")[0];
-            linkUrl = decodeURIComponent(encodedUrl);
-          }
-        } else {
-          linkUrl = rawLink;
-        }
+      const linkMatch = item.match(/<link>([\s\S]*?)<\/link>/);
+      if (linkMatch) {
+        linkUrl = linkMatch[1]
+          .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+          .trim();
       }
       
-      // 3. Extract Snippet
-      let snippet = "";
-      const snippetMatch = block.match(/class="result__snippet"[^>]*>([\s\S]*?)<\/a>/);
-      if (snippetMatch) {
-        snippet = snippetMatch[1].replace(/<[^>]*>/g, "").trim();
+      // 3. Extract Snippet / Source metadata
+      let pubDate = "";
+      const pubDateMatch = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
+      if (pubDateMatch) {
+        pubDate = pubDateMatch[1].trim();
       }
       
-      if (title && snippet) {
+      let source = "";
+      const sourceMatch = item.match(/<source[^>]*>([\s\S]*?)<\/source>/);
+      if (sourceMatch) {
+        source = sourceMatch[1]
+          .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+          .replace(/<[^>]*>/g, "")
+          .trim();
+      }
+      
+      let snippet = `Berita dari ${source || "Media Terpercaya"} pada ${pubDate || "baru-baru ini"}.`;
+      
+      if (title && linkUrl) {
         results.push({ title, url: linkUrl, snippet });
       }
     }
