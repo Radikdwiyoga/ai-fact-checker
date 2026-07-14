@@ -2,7 +2,6 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import { GoogleGenAI, Type } from "@google/genai";
-import { createServer as createViteServer } from "vite";
 
 dotenv.config();
 
@@ -1325,6 +1324,7 @@ document.getElementById('check-btn').addEventListener('click', async () => {
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     // Integrate Vite in Middleware mode for Hot Reload and typescript dev experience
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
