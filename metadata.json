@@ -1,0 +1,6 @@
+{
+  "name": "Fake News Detection & Fact-checking Assistant",
+  "description": "An AI-powered tool to detect fake news, propaganda, and bias, verified with real-time Google Search grounding. Supports Indonesian language and includes a simulated browser extension.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
