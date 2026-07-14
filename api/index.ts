@@ -57,7 +57,7 @@ async function generateContentWithModelFallback(
     config: any;
   }
 ) {
-  const models = ["gemini-flash-latest", "gemini-3.1-flash-lite"];
+  const models = ["gemini-3.5-flash", "gemini-3.1-flash-lite"];
   let lastError: any = null;
 
   for (const model of models) {
@@ -648,26 +648,34 @@ app.post("/api/analyze", async (req, res) => {
   try {
     const ai = getGeminiClient();
 
-    const systemPrompt = `You are an elite, objective, and extremely precise Fact-Checking Assistant specializing in fake news detection, claim verification, propaganda analysis, and media bias detection.
-You verify claims strictly against credible fact-checking websites (such as Snopes, AFP Fact Check, TurnBackHoax ID, Mafindo, Kompas, Tempo, CekFakta) using your search tools.
-You are neutral, objective, and base all ratings on concrete grounding data.`;
+    const systemPrompt = `You are VerifikasiAI, an elite, objective, and extremely precise Fact-Checking Assistant specializing in fake news detection, claim verification, propaganda analysis, and media bias detection.
+You must use your googleSearch tool to perform live real-time Google searches on the core claim to check if it has been verified, debunked, or covered by official fact-checking institutions (such as Mafindo/TurnBackHoax, CekFakta, Kompas Tren, Tempo CekFakta, Liputan6 Cek Fakta, Snopes, AFP Fact Check, Reuters Fact Check, AP).
+You must remain absolutely objective and neutral. Always ground your analysis and rating on solid, verifiable evidence rather than speculative pre-trained knowledge.`;
 
     const searchResultsText = searchResults.length > 0 
       ? searchResults.map((r, idx) => `[${idx + 1}] Title: ${r.title}\nURL: ${r.url}\nSnippet: ${r.snippet}`).join("\n\n")
       : "No real-time search results found.";
 
-    const prompt = `Perform a rigorous fake news detection, claim verification, propaganda analysis, and bias analysis on the following news content or headline.
+    const prompt = `Perform a rigorous, extremely detailed fake news detection, claim verification, propaganda analysis, and bias analysis on the following news content or headline.
+
 Content to analyze:
 "${text}"
 ${sourceUrl ? `Source URL: ${sourceUrl}` : ""}
 
-REAL-TIME WEB SEARCH GROUNDING CONTEXT (ACTIVE REFERENCE):
+LIVE SEARCH GROUNDING DIRECTIVE:
+You MUST use your googleSearch tool to search for verifications, fact-checks, or primary sources about this claim. Try targeted search terms such as:
+- "${text.substring(0, 100).replace(/"/g, "")} cek fakta"
+- "${text.substring(0, 100).replace(/"/g, "")} hoax"
+- "${text.substring(0, 100).replace(/"/g, "")} berita terbaru"
+- "${text.substring(0, 100).replace(/"/g, "")} fact check"
+
+REAL-TIME WEB SEARCH GROUNDING CONTEXT (PRE-FETCHED REFERENCES FROM SCRAPER):
 ${searchResultsText}
 
 Analyze the content according to these four pillars:
-1. Source & Claim Verification: Verify if the claim matches the REAL-TIME WEB SEARCH GROUNDING CONTEXT above or other established real-world facts. Point out any clear agreements or contradictions.
-2. Source Credibility Check: Assess the reliability of this information's source.
-3. Propaganda Detection: Identify loaded language, appeal to emotion/fear, scapegoating, cherry-picking, or other manipulation techniques.
+1. Source & Claim Verification: Verify if the claim matches the search results, established facts, or official clarifications. Point out clear agreements, contradictions, or lack of coverage. Include details about which fact-checkers checked this and what they found.
+2. Source Credibility Check: Assess the reliability of this information's source. Is it a registered press outlet, a personal social media post, or a known clickbait site?
+3. Propaganda Detection: Identify any loaded language, appeal to emotion/fear, exaggeration, scapegoating, cherry-picking, or other manipulation techniques.
 4. Bias Analysis: Identify ideological, political, or sensationalist bias.
 
 Write all descriptions, analyses, and suggestions in "${language === "id" ? "Bahasa Indonesia" : "English"}".`;
@@ -729,6 +737,17 @@ Report to convert:
 """
 ${reportText}
 """
+
+CREDIBILITY SCORE & RATING GUIDELINES:
+Align the rating and the credibilityScore strictly using the scale below:
+- "Trusted" (90 - 100): The claim is fully verified by official authorities or multiple highly reputable news outlets, with no major biases or red flags.
+- "Mostly Credible" (75 - 89): The claim is highly likely to be true and aligns with reputable sources, but may have minor unsourced details or mild bias.
+- "Mixed" (50 - 74): The claim contains a mix of verified facts and unverified, misleading, or disputed details.
+- "Unverified" (40 - 49): There is no sufficient evidence, official clarification, or reputable news coverage to confirm or deny the claim yet.
+- "Disputed" (30 - 39): The claim is a subject of active controversy, ongoing investigation, or strong disagreement among reputable parties with no consensus yet.
+- "Misleading" (15 - 29): The claim twists real facts out of context or uses selective reporting to create a false or deceptive impression.
+- "Satire" (10 - 25): The content is presented as news but is actually a joke, parody, or humorous commentary not meant to be taken literally.
+- "False" (0 - 14): The claim is fully fabricated, proven untrue, or debunked as a hoax by official agencies or independent fact-checking bodies.
 
 Ensure:
 - "verdictID" is in Bahasa Indonesia.
@@ -858,7 +877,8 @@ app.post("/api/extension/analyze", async (req, res) => {
   try {
     const ai = getGeminiClient();
 
-    const systemPrompt = `You are an elite Fact-Checking Assistant. Perform a search to verify details and write a brief analysis.`;
+    const systemPrompt = `You are VerifikasiAI, an elite, objective, and extremely precise Fact-Checking Assistant specializing in fake news detection, claim verification, and browser security flagging.
+You must use your googleSearch tool to run real-time Google searches on the core claim to verify its accuracy against reputable fact-checking websites and reliable news sources.`;
 
     const searchResultsText = searchResults.length > 0 
       ? searchResults.map((r, idx) => `[${idx + 1}] Title: ${r.title}\nURL: ${r.url}\nSnippet: ${r.snippet}`).join("\n\n")
@@ -868,10 +888,13 @@ app.post("/api/extension/analyze", async (req, res) => {
 "${text}"
 ${url ? `URL: ${url}` : ""}
 
-REAL-TIME WEB SEARCH GROUNDING CONTEXT (ACTIVE REFERENCE):
+LIVE SEARCH GROUNDING DIRECTIVE:
+You MUST use your googleSearch tool to verify this claim's accuracy in real-time.
+
+REAL-TIME WEB SEARCH GROUNDING CONTEXT (PRE-FETCHED REFERENCES FROM SCRAPER):
 ${searchResultsText}
 
-Determine if it's safe (Green), unverified/biased (Yellow), or fabricated/misleading (Red) based on the web search context.`;
+Determine if it's safe (Green - verified true/highly credible), unverified/biased (Yellow - controversial, mixed, unverified), or fabricated/misleading (Red - debunked hoax, misleading, or phishing) based on verified facts.`;
 
     // STEP 1: Search grounding
     let step1Response;
