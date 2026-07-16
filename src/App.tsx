@@ -112,98 +112,67 @@ const THEMES: Record<string, {
   tabInactive: string;
   tabHover: string;
   neutralMuted: string;
+  gridClass: string;
+  shadowOffset: string;
+  badgeClass: string;
+  tagBorder: string;
+  baseFont: string;
 }> = {
   light: {
-    nameId: "Terang",
-    nameEn: "Light",
-    bg: "bg-slate-50/50",
-    text: "text-slate-900",
-    cardBg: "bg-white",
-    cardBorder: "border-slate-200",
-    headerBg: "bg-white/90 border-b border-slate-200 backdrop-blur-md",
-    accentText: "text-sky-600",
-    accentBg: "bg-sky-50/70 border border-sky-100",
-    buttonBg: "bg-sky-600 hover:bg-sky-700 text-white shadow-sky-100",
-    buttonHoverBg: "hover:bg-sky-50",
-    primaryBrand: "sky",
-    footerBg: "bg-white border-t border-slate-200",
+    nameId: "Sleek Dark",
+    nameEn: "Sleek Dark",
+    bg: "bg-[#090D1A] bg-grid-dark",
+    text: "text-slate-100",
+    cardBg: "bg-[#111827]",
+    cardBorder: "border-slate-800",
+    headerBg: "bg-[#090D1A]/90 backdrop-blur-md border-b border-slate-800/85",
+    accentText: "text-blue-400",
+    accentBg: "bg-blue-500/5 border border-blue-500/15",
+    buttonBg: "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/10",
+    buttonHoverBg: "hover:bg-slate-800",
+    primaryBrand: "blue",
+    footerBg: "bg-[#090D1A] border-t border-slate-800/70",
     footerText: "text-slate-400",
-    inputBg: "bg-white",
-    inputText: "text-slate-800",
-    inputBorder: "border-slate-200 focus:border-sky-500 focus:ring-sky-500/20",
-    tabActive: "border-sky-600 text-sky-600 bg-sky-50/30",
-    tabInactive: "border-transparent text-slate-500",
-    tabHover: "hover:text-slate-800 hover:bg-slate-50",
-    neutralMuted: "text-slate-500"
+    inputBg: "bg-[#0B0F19]",
+    inputText: "text-slate-100",
+    inputBorder: "border-slate-800 focus:border-blue-500 focus:ring-blue-500/20",
+    tabActive: "border-blue-500 text-blue-400 bg-blue-500/10 font-bold",
+    tabInactive: "border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50",
+    tabHover: "hover:text-slate-200 hover:bg-slate-800/50",
+    neutralMuted: "text-slate-400",
+    gridClass: "bg-grid-dark",
+    shadowOffset: "shadow-2xl shadow-slate-950/50",
+    badgeClass: "border border-slate-800 font-mono",
+    tagBorder: "border-slate-800",
+    baseFont: "font-sans"
   },
   dark: {
-    nameId: "Kosmik",
-    nameEn: "Cosmic Dark",
-    bg: "bg-slate-950",
+    nameId: "Sleek Dark",
+    nameEn: "Sleek Dark",
+    bg: "bg-[#090D1A] bg-grid-dark",
     text: "text-slate-100",
-    cardBg: "bg-slate-900/90 border border-slate-800 backdrop-blur-md",
+    cardBg: "bg-[#111827]",
     cardBorder: "border-slate-800",
-    headerBg: "bg-slate-900/90 border-b border-slate-800 backdrop-blur-md",
-    accentText: "text-indigo-400",
-    accentBg: "bg-indigo-950/40 border border-indigo-900/30",
-    buttonBg: "bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-900/20",
-    buttonHoverBg: "hover:bg-indigo-950/20",
-    primaryBrand: "indigo",
-    footerBg: "bg-slate-950 border-t border-slate-900",
-    footerText: "text-slate-500",
-    inputBg: "bg-slate-950",
+    headerBg: "bg-[#090D1A]/90 backdrop-blur-md border-b border-slate-800/85",
+    accentText: "text-blue-400",
+    accentBg: "bg-blue-500/5 border border-blue-500/15",
+    buttonBg: "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/10",
+    buttonHoverBg: "hover:bg-slate-800",
+    primaryBrand: "blue",
+    footerBg: "bg-[#090D1A] border-t border-slate-800/70",
+    footerText: "text-slate-400",
+    inputBg: "bg-[#0B0F19]",
     inputText: "text-slate-100",
-    inputBorder: "border-slate-800 focus:border-indigo-500 focus:ring-indigo-500/20",
-    tabActive: "border-indigo-500 text-indigo-400 bg-indigo-950/20",
-    tabInactive: "border-transparent text-slate-400",
+    inputBorder: "border-slate-800 focus:border-blue-500 focus:ring-blue-500/20",
+    tabActive: "border-blue-500 text-blue-400 bg-blue-500/10 font-bold",
+    tabInactive: "border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50",
     tabHover: "hover:text-slate-200 hover:bg-slate-800/50",
-    neutralMuted: "text-slate-400"
-  },
-  sage: {
-    nameId: "Sage Kalem",
-    nameEn: "Sage Calm",
-    bg: "bg-[#f4f7f4]",
-    text: "text-emerald-950",
-    cardBg: "bg-white",
-    cardBorder: "border-emerald-100",
-    headerBg: "bg-white/90 border-b border-emerald-100 backdrop-blur-md",
-    accentText: "text-emerald-700",
-    accentBg: "bg-emerald-50/70 border border-emerald-100/50",
-    buttonBg: "bg-emerald-700 hover:bg-emerald-800 text-white shadow-emerald-100",
-    buttonHoverBg: "hover:bg-emerald-50",
-    primaryBrand: "emerald",
-    footerBg: "bg-white border-t border-emerald-150",
-    footerText: "text-emerald-700/60",
-    inputBg: "bg-white",
-    inputText: "text-emerald-900",
-    inputBorder: "border-emerald-100 focus:border-emerald-600 focus:ring-emerald-600/20",
-    tabActive: "border-emerald-700 text-emerald-700 bg-emerald-50/30",
-    tabInactive: "border-transparent text-emerald-700/60",
-    tabHover: "hover:text-emerald-950 hover:bg-emerald-50/50",
-    neutralMuted: "text-emerald-800/60"
-  },
-  retro: {
-    nameId: "Redaksi Retro",
-    nameEn: "Retro Editorial",
-    bg: "bg-[#faf8f3]",
-    text: "text-stone-900",
-    cardBg: "bg-[#f4eedf] border border-stone-300",
-    cardBorder: "border-stone-300",
-    headerBg: "bg-[#f4eedf]/90 border-b border-stone-300 backdrop-blur-md",
-    accentText: "text-amber-950",
-    accentBg: "bg-amber-100/60 border border-amber-200/50",
-    buttonBg: "bg-stone-900 hover:bg-stone-800 text-[#faf8f3] shadow-sm",
-    buttonHoverBg: "hover:bg-stone-200/50",
-    primaryBrand: "stone",
-    footerBg: "bg-[#f4eedf] border-t border-stone-300",
-    footerText: "text-stone-500",
-    inputBg: "bg-[#faf8f3]",
-    inputText: "text-stone-900",
-    inputBorder: "border-stone-300 focus:border-stone-800 focus:ring-stone-800/10",
-    tabActive: "border-stone-900 text-stone-900 bg-stone-200/50",
-    tabInactive: "border-transparent text-stone-600",
-    tabHover: "hover:text-stone-900 hover:bg-stone-200/30",
-    neutralMuted: "text-stone-500"
+    neutralMuted: "text-slate-400",
+    gridClass: "bg-grid-dark",
+    shadowOffset: "shadow-2xl shadow-slate-950/50",
+    badgeClass: "border border-slate-800 font-mono",
+    tagBorder: "border-slate-800",
+    baseFont: "font-sans"
   }
 };
 
@@ -211,8 +180,8 @@ export default function App() {
   // Localization: 'id' for Bahasa Indonesia, 'en' for English
   const [lang, setLang] = useState<"id" | "en">("id");
 
-  // Visual Theme state
-  const [themeKey, setThemeKey] = useState<"light" | "dark" | "sage" | "retro">("light");
+  // Visual Theme state: locked to dark
+  const [themeKey, setThemeKey] = useState<"light" | "dark">("dark");
   const activeTheme = THEMES[themeKey];
 
   // Core Fact checker state
@@ -232,12 +201,12 @@ export default function App() {
   // Load theme preference from localStorage if available
   useEffect(() => {
     const savedTheme = localStorage.getItem("verifikasiai-theme");
-    if (savedTheme && THEMES[savedTheme]) {
-      setThemeKey(savedTheme as any);
+    if (savedTheme && (savedTheme === "light" || savedTheme === "dark")) {
+      setThemeKey(savedTheme);
     }
   }, []);
 
-  const changeTheme = (newTheme: "light" | "dark" | "sage" | "retro") => {
+  const changeTheme = (newTheme: "light" | "dark") => {
     setThemeKey(newTheme);
     localStorage.setItem("verifikasiai-theme", newTheme);
   };
@@ -324,679 +293,588 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen ${activeTheme.bg} ${activeTheme.text} font-sans antialiased transition-colors duration-300`}>
+    <div className={`min-h-screen ${activeTheme.bg} ${activeTheme.text} ${activeTheme.baseFont} antialiased transition-all duration-300 pb-12`}>
       {/* HEADER SECTION */}
-      <header className={`sticky top-0 z-50 ${activeTheme.headerBg} transition-colors duration-300 shadow-sm`}>
+      <header className={`sticky top-0 z-50 ${activeTheme.headerBg} border-b border-slate-800/60 transition-colors duration-300`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <motion.div 
-              className={`${themeKey === 'dark' ? 'bg-indigo-600' : 'bg-sky-600'} text-white p-2.5 rounded-xl shadow-md flex items-center justify-center`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ShieldCheck className="w-6 h-6" id="app-logo-icon" />
-            </motion.div>
+            <div className="p-2 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-500/10">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
             <div>
-              <span className="font-extrabold text-lg tracking-tight flex items-center gap-1.5">
-                VerifikasiAI
-                <span className={`text-[10px] ${themeKey === 'dark' ? 'bg-indigo-950 text-indigo-300 border border-indigo-900/50' : 'bg-sky-100 text-sky-800'} font-bold px-2 py-0.5 rounded-full`}>v1.3</span>
-              </span>
-              <p className={`text-[11px] ${activeTheme.neutralMuted} font-medium hidden sm:block`}>Independent Real-time Verification Engine</p>
+              <div className="flex items-center gap-2">
+                <span className="font-sans font-extrabold text-lg sm:text-xl tracking-tight text-white">
+                  VerifikasiAI
+                </span>
+                <span className="font-mono text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  v1.3
+                </span>
+              </div>
+              <p className="text-[9px] text-slate-400 font-mono uppercase tracking-wider hidden sm:block mt-0.5">
+                Independent Real-time Verification Engine
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Theme Selector Palette Toggle */}
-            <div className={`flex items-center gap-1.5 ${themeKey === 'dark' ? 'bg-slate-800/80 border-slate-700' : 'bg-slate-150/80 border-slate-200'} p-1 rounded-xl border`}>
-              <button
-                onClick={() => changeTheme("light")}
-                className={`p-1.5 rounded-lg transition-all ${themeKey === "light" ? "bg-white text-sky-600 shadow-sm" : "text-slate-400 hover:text-slate-700"}`}
-                title="Light Theme"
-              >
-                <Sun className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => changeTheme("dark")}
-                className={`p-1.5 rounded-lg transition-all ${themeKey === "dark" ? "bg-slate-950 text-indigo-400 shadow-sm" : "text-slate-500 hover:text-slate-200"}`}
-                title="Cosmic Dark"
-              >
-                <Moon className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => changeTheme("sage")}
-                className={`p-1.5 rounded-lg transition-all ${themeKey === "sage" ? "bg-[#f4f7f4] text-emerald-700 border border-emerald-100 shadow-sm" : "text-slate-400 hover:text-emerald-700"}`}
-                title="Sage Calm"
-              >
-                <Leaf className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => changeTheme("retro")}
-                className={`p-1.5 rounded-lg transition-all ${themeKey === "retro" ? "bg-[#f4eedf] text-amber-950 border border-stone-300 shadow-sm" : "text-slate-400 hover:text-stone-800"}`}
-                title="Retro Editorial"
-              >
-                <Newspaper className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Bilingual Toggle */}
-            <div className={`p-1 rounded-xl flex items-center border ${themeKey === 'dark' ? 'bg-slate-800/80 border-slate-700' : 'bg-slate-150/80 border-slate-200'}`}>
+            {/* Bilingual Toggle Button Group */}
+            <div className="flex border border-slate-800 rounded-lg overflow-hidden bg-slate-900/60">
               <button 
                 id="lang-btn-id"
                 onClick={() => setLang("id")}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
+                className={`px-3 py-1.5 font-mono text-[10px] font-bold tracking-wider transition-all cursor-pointer ${
                   lang === "id" 
-                    ? "bg-white text-slate-900 shadow-sm" 
-                    : "text-slate-400 hover:text-slate-800"
+                    ? "bg-blue-600 text-white" 
+                    : "text-slate-400 hover:text-white hover:bg-slate-800/45"
                 }`}
               >
-                🇮🇩 ID
+                ID ID
               </button>
               <button 
                 id="lang-btn-en"
                 onClick={() => setLang("en")}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
+                className={`px-3 py-1.5 font-mono text-[10px] font-bold tracking-wider transition-all cursor-pointer border-l border-slate-800 ${
                   lang === "en" 
-                    ? "bg-white text-slate-900 shadow-sm" 
-                    : "text-slate-400 hover:text-slate-800"
+                    ? "bg-blue-600 text-white" 
+                    : "text-slate-400 hover:text-white hover:bg-slate-800/45"
                 }`}
               >
-                🇬🇧 EN
+                GB EN
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* HERO SECTION */}
-      <div className={`relative overflow-hidden py-10 px-4 transition-colors duration-300`}>
-        {/* Ambient background decoration */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none overflow-hidden">
-          <div className={`absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 mix-blend-multiply ${
-            themeKey === 'dark' ? 'bg-indigo-500' : 'bg-sky-400'
-          }`} />
-          <div className={`absolute top-10 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-20 mix-blend-multiply ${
-            themeKey === 'dark' ? 'bg-purple-500' : 'bg-amber-300'
-          }`} />
-        </div>
-
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <motion.h1 
-            className="text-3xl sm:text-4xl font-black tracking-tight leading-tight"
-            initial={{ opacity: 0, y: -20 }}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* HERO SECTION */}
+        <section className="text-center pb-6 mb-8 mt-10">
+          <motion.h2 
+            className="font-sans font-extrabold text-3.5xl sm:text-4.5xl tracking-tight leading-tight mb-3.5 text-white"
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             {t.title}
-          </motion.h1>
+          </motion.h2>
           <motion.p 
-            className="mt-3.5 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed opacity-85"
+            className="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed text-slate-400 font-sans"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
           >
             {t.subtitle}
           </motion.p>
-        </div>
-      </div>
+        </section>
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="space-y-8">
-            
-            {/* INPUT CARD */}
-            <motion.div 
-              className={`${activeTheme.cardBg} border ${activeTheme.cardBorder} rounded-2xl shadow-sm p-6`} 
-              id="input-card"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-            >
-              <h2 className="text-base font-bold flex items-center gap-2 mb-4">
-                <Search className={`w-5 h-5 ${activeTheme.accentText}`} />
+        {/* CENTERED WORKSPACE DASHBOARD */}
+        <div className="space-y-8 mt-6">
+          
+          {/* MAIN INPUT & EXAMPLES CARD */}
+          <motion.div 
+            className="bg-[#111827] border border-slate-800/80 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-slate-950/50 relative transition-all duration-300 space-y-6" 
+            id="input-card"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+          >
+            {/* Input Label Header */}
+            <div className="flex items-center gap-2.5 pb-2 border-b border-slate-800">
+              <Search className="w-5 h-5 text-blue-400" />
+              <h3 className="font-sans font-bold text-base text-slate-100">
                 {t.enterNews}
-              </h2>
+              </h3>
+            </div>
 
-              <div className="space-y-4">
-                <div>
-                  <textarea
-                    id="news-textarea"
-                    rows={4}
-                    value={textInput}
-                    onChange={(e) => setTextInput(e.target.value)}
-                    placeholder={t.textPlaceholder}
-                    className={`w-full rounded-xl border p-4 text-sm focus:outline-none transition-all resize-y ${
-                      themeKey === 'dark' 
-                        ? 'bg-slate-950 border-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 text-slate-100 placeholder-slate-500' 
-                        : themeKey === 'sage'
-                        ? 'bg-white border-emerald-100 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/10 text-emerald-950 placeholder-emerald-300'
-                        : themeKey === 'retro'
-                        ? 'bg-[#faf8f3] border-stone-300 focus:border-stone-800 focus:ring-2 focus:ring-stone-800/10 text-stone-900 placeholder-stone-400'
-                        : 'bg-white border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/10 text-slate-800 placeholder-slate-400'
-                    }`}
+            <div className="space-y-4">
+              <div>
+                <textarea
+                  id="news-textarea"
+                  rows={4}
+                  value={textInput}
+                  onChange={(e) => setTextInput(e.target.value)}
+                  placeholder={t.textPlaceholder}
+                  className="w-full bg-[#0B0F19] border border-slate-800 rounded-xl p-4 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all resize-y font-sans"
+                />
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
+                <div className="relative flex-grow">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                    <Globe className="w-4 h-4" />
+                  </div>
+                  <input
+                    id="news-url-input"
+                    type="url"
+                    value={urlInput}
+                    onChange={(e) => setUrlInput(e.target.value)}
+                    placeholder={t.urlPlaceholder}
+                    className="w-full bg-[#0B0F19] border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all font-mono"
                   />
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="relative grow">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                      <Globe className="w-4 h-4" />
-                    </div>
-                    <input
-                      id="news-url-input"
-                      type="url"
-                      value={urlInput}
-                      onChange={(e) => setUrlInput(e.target.value)}
-                      placeholder={t.urlPlaceholder}
-                      className={`w-full rounded-xl border pl-10 pr-4 py-2.5 text-sm focus:outline-none transition-all ${
-                        themeKey === 'dark' 
-                          ? 'bg-slate-950 border-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 text-slate-100 placeholder-slate-500' 
-                          : themeKey === 'sage'
-                          ? 'bg-white border-emerald-100 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/10 text-emerald-950 placeholder-emerald-300'
-                          : themeKey === 'retro'
-                          ? 'bg-[#faf8f3] border-stone-300 focus:border-stone-800 focus:ring-2 focus:ring-stone-800/10 text-stone-900 placeholder-stone-400'
-                          : 'bg-white border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/10 text-slate-800 placeholder-slate-400'
-                      }`}
-                    />
-                  </div>
+                <motion.button
+                  id="submit-analysis-btn"
+                  onClick={() => handleAnalyze(textInput, urlInput)}
+                  disabled={isAnalyzing || !textInput.trim()}
+                  className={`px-6 py-3.5 rounded-xl font-sans text-xs font-bold uppercase tracking-wider transition-all shrink-0 flex items-center justify-center gap-2.5 ${
+                    isAnalyzing || !textInput.trim()
+                      ? "bg-slate-800/40 text-slate-500 border border-slate-800/60 cursor-not-allowed"
+                      : "bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-900/30 cursor-pointer"
+                  }`}
+                  whileHover={{ scale: isAnalyzing || !textInput.trim() ? 1 : 1.01 }}
+                  whileTap={{ scale: isAnalyzing || !textInput.trim() ? 1 : 0.99 }}
+                >
+                  {isAnalyzing ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      <span>{t.analyzing}</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>{t.analyzeBtn}</span>
+                    </>
+                  )}
+                </motion.button>
+              </div>
+            </div>
 
+            {/* Divider */}
+            <div className="border-t border-slate-800/80 my-4" />
+
+            {/* Coba Contoh Kasus Grid */}
+            <div className="space-y-4">
+              <h4 className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-bold">
+                {t.examplesTitle}
+              </h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {(lang === "id" ? INDONESIAN_EXAMPLES : ENGLISH_EXAMPLES).map((item, idx) => (
                   <motion.button
-                    id="submit-analysis-btn"
-                    onClick={() => handleAnalyze(textInput, urlInput)}
-                    disabled={isAnalyzing || !textInput.trim()}
-                    className={`px-6 py-2.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                      isAnalyzing || !textInput.trim()
-                        ? "bg-slate-100 text-slate-400 dark:bg-slate-900 dark:text-slate-600 cursor-not-allowed"
-                        : activeTheme.buttonBg
-                    }`}
-                    whileHover={{ scale: isAnalyzing || !textInput.trim() ? 1 : 1.02 }}
-                    whileTap={{ scale: isAnalyzing || !textInput.trim() ? 1 : 0.98 }}
+                    id={`demo-claim-${idx}`}
+                    key={idx}
+                    onClick={() => {
+                      setTextInput(item.title);
+                      setUrlInput(item.url || "");
+                      handleAnalyze(item.title, item.url);
+                    }}
+                    className="text-left p-4 rounded-xl bg-[#0B0F19]/50 hover:bg-[#0B0F19] border border-slate-800/70 hover:border-slate-700 flex flex-col justify-between gap-3.5 h-full transition-all duration-200 cursor-pointer"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
                   >
-                    {isAnalyzing ? (
-                      <>
-                        <RefreshCw className="w-4 h-4 animate-spin" />
-                        <span>{t.analyzing}</span>
-                      </>
-                    ) : (
-                      <>
-                        <ShieldCheck className="w-4 h-4" />
-                        <span>{t.analyzeBtn}</span>
-                      </>
-                    )}
-                  </motion.button>
-                </div>
-              </div>
+                    <p className="text-xs leading-relaxed text-slate-200 font-sans font-medium">
+                      "{item.title}"
+                    </p>
 
-              {/* DEMO EXAMPLES QUICK FILL */}
-              <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80">
-                <span className={`text-xs font-bold uppercase tracking-wider block mb-3 ${activeTheme.neutralMuted}`}>
-                  {t.examplesTitle}
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {(lang === "id" ? INDONESIAN_EXAMPLES : ENGLISH_EXAMPLES).map((item, idx) => (
-                    <motion.button
-                      id={`demo-claim-${idx}`}
-                      key={idx}
-                      onClick={() => {
-                        setTextInput(item.title);
-                        setUrlInput(item.url || "");
-                        handleAnalyze(item.title, item.url);
-                      }}
-                      className={`text-left p-3 rounded-xl border transition-all text-xs flex flex-col justify-between group cursor-pointer ${
-                        themeKey === 'dark' 
-                          ? 'border-slate-800 hover:border-indigo-500 hover:bg-indigo-950/20' 
-                          : themeKey === 'sage'
-                          ? 'border-emerald-50 hover:border-emerald-200 hover:bg-emerald-50/50'
-                          : themeKey === 'retro'
-                          ? 'border-stone-300 hover:border-stone-500 hover:bg-stone-200/20'
-                          : 'border-slate-100 hover:border-sky-200 hover:bg-sky-50/50'
-                      }`}
-                      whileHover={{ scale: 1.01, y: -1 }}
-                      whileTap={{ scale: 0.99 }}
-                    >
-                      <span className="font-medium group-hover:opacity-100 opacity-90 line-clamp-2 mb-2">
-                        "{item.title}"
+                    <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-900/40">
+                      <span className="font-mono text-[9px] uppercase tracking-wider text-slate-400 bg-slate-800/40 px-2 py-0.5 rounded border border-slate-800/30">
+                        {item.label}
                       </span>
-                      <div className="flex items-center justify-between w-full">
-                        <span className={`text-[10px] px-2 py-0.5 rounded-md font-semibold border ${
-                          themeKey === 'dark' 
-                            ? 'bg-slate-800 text-slate-300 border-slate-700' 
-                            : themeKey === 'sage'
-                            ? 'bg-emerald-50 text-emerald-800 border-emerald-100'
-                            : themeKey === 'retro'
-                            ? 'bg-stone-200 text-stone-800 border-stone-300'
-                            : 'bg-slate-50 text-slate-500 border-slate-100'
-                        }`}>
-                          {item.label}
-                        </span>
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
-                          item.isFake 
-                            ? "bg-red-50 text-red-600 dark:bg-red-950/20 dark:text-red-400" 
-                            : "bg-green-50 text-green-600 dark:bg-green-950/20 dark:text-green-400"
-                        }`}>
-                          {item.isFake ? (lang === "id" ? "Kemungkinan Hoaks" : "Likely Fake") : (lang === "id" ? "Valid/Resmi" : "Valid/Official")}
-                        </span>
-                      </div>
-                    </motion.button>
-                  ))}
-                </div>
+                      <span className={`font-mono text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
+                        item.isFake 
+                          ? "text-rose-400 bg-rose-500/5 border-rose-500/10" 
+                          : "text-emerald-400 bg-emerald-500/5 border-emerald-500/10"
+                      }`}>
+                        {item.isFake ? (lang === "id" ? "KEMUNGKINAN HOAKS" : "LIKELY FAKE") : (lang === "id" ? "VALID / RESMI" : "VALID / OFFICIAL")}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
-            {/* ERROR VIEW */}
-            {errorMsg && (
-              <motion.div 
-                className="bg-rose-50 border border-rose-200 dark:bg-rose-950/20 dark:border-rose-900/40 rounded-xl p-4 text-sm text-rose-800 dark:text-rose-300 flex items-start gap-3"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
-                <ShieldAlert className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+          {/* Verification tag indicator */}
+          <div className="font-mono text-[9px] uppercase tracking-widest flex items-center gap-2 opacity-50 justify-center">
+            <span>[*]</span>
+            <span>INDEPENDENT REAL-TIME VERIFICATION ENGINE</span>
+          </div>
+
+          {/* ERROR VIEW */}
+          {errorMsg && (
+            <motion.div 
+              className="bg-rose-950/30 border border-rose-900/50 rounded-2xl p-6 text-slate-100 relative shadow-xl shadow-slate-950/25"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+            >
+              <div className="flex items-start gap-3">
+                <ShieldAlert className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold">{lang === "id" ? "Gagal Menganalisis Berita" : "Analysis Failed"}</h4>
-                  <p className="mt-1">{errorMsg}</p>
-                  <p className="mt-2 text-xs font-semibold text-rose-700 dark:text-rose-400">
+                  <h4 className="font-mono text-xs uppercase tracking-wider font-bold text-rose-300">{lang === "id" ? "Gagal Menganalisis" : "Analysis Failed"}</h4>
+                  <p className="mt-1 text-sm text-slate-300 leading-relaxed">{errorMsg}</p>
+                  <p className="mt-3 text-xs font-mono uppercase tracking-wider text-rose-400">
                     💡 Tip: {t.errorApiKey}
                   </p>
                 </div>
-              </motion.div>
-            )}
-
-            {/* MAIN RESULTS SECTION */}
-            <AnimatePresence mode="wait">
-              {result ? (
-                <motion.div 
-                  className={`${activeTheme.cardBg} border ${activeTheme.cardBorder} rounded-2xl shadow-sm p-6 space-y-6`} 
-                  id="analysis-results"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {/* Visual Header */}
-                  <div className="flex flex-col md:flex-row gap-6 md:items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800/80">
-                    <div className="flex items-center gap-4">
-                      <div className="shrink-0 p-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl">
-                        {result.data.credibilityScore >= 75 ? (
-                          <CheckCircle className="w-12 h-12 text-emerald-500" />
-                        ) : result.data.credibilityScore >= 45 ? (
-                          <AlertTriangle className="w-12 h-12 text-amber-500" />
-                        ) : (
-                          <ShieldAlert className="w-12 h-12 text-rose-500" />
-                        )}
-                      </div>
-                      <div>
-                        <span className={`text-xs font-extrabold uppercase tracking-wider ${activeTheme.neutralMuted}`}>{t.overallRating}</span>
-                        <div className="flex items-center gap-2.5 mt-0.5">
-                          <span className={`px-3 py-1 rounded-full text-sm font-black border ${getRatingBadgeColor(result.data.rating)}`}>
-                            {result.data.rating}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SCORE GAUGE */}
-                    <div className="flex items-center gap-4">
-                      <div className="text-right">
-                        <span className={`text-xs font-extrabold uppercase tracking-wider block ${activeTheme.neutralMuted}`}>{t.credibilityScore}</span>
-                        <span className="text-3xl font-black tracking-tight">{result.data.credibilityScore} <span className="text-sm font-normal text-slate-400">/ 100</span></span>
-                      </div>
-                      {/* Ring gauge simulation with animations */}
-                      <div className="relative w-14 h-14 flex items-center justify-center">
-                        <svg className="w-full h-full transform -rotate-90">
-                          <circle
-                            cx="28"
-                            cy="28"
-                            r="24"
-                            stroke={themeKey === 'dark' ? '#1e293b' : '#f1f5f9'}
-                            strokeWidth="5"
-                            fill="transparent"
-                          />
-                          <motion.circle
-                            cx="28"
-                            cy="28"
-                            r="24"
-                            stroke={
-                              result.data.credibilityScore >= 75 ? "#10b981" : result.data.credibilityScore >= 45 ? "#f59e0b" : "#f43f5e"
-                            }
-                            strokeWidth="5"
-                            fill="transparent"
-                            strokeDasharray={2 * Math.PI * 24}
-                            initial={{ strokeDashoffset: 2 * Math.PI * 24 }}
-                            animate={{ strokeDashoffset: 2 * Math.PI * 24 * (1 - result.data.credibilityScore / 100) }}
-                            transition={{ duration: 1.2, ease: "easeOut" }}
-                          />
-                        </svg>
-                        <span className="absolute text-xs font-extrabold">%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* EXECUTIVE SUMMARY */}
-                  <motion.div 
-                    className={`${
-                      themeKey === 'dark' ? 'bg-indigo-950/20 border-indigo-900/50' : 'bg-sky-50/50 border border-sky-100'
-                    } rounded-xl p-4`}
-                    initial={{ scale: 0.98, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <h4 className={`text-xs font-extrabold uppercase tracking-wider mb-2 flex items-center gap-1.5 ${activeTheme.accentText}`}>
-                      <Info className="w-4 h-4" />
-                      {t.summary}
-                    </h4>
-                    <p className="text-sm leading-relaxed font-medium">
-                      {result.data.summary}
-                    </p>
-                  </motion.div>
-
-                  {/* FOUR PILLARS TABBED SECTION */}
-                  <div className="space-y-4">
-                    <div className="border-b border-slate-200 dark:border-slate-800/80">
-                      <nav className="flex flex-wrap -mb-px gap-1 relative">
-                        {Object.keys(t.tabs).map((tabKey) => {
-                          const key = tabKey as keyof typeof t.tabs;
-                          const isActive = activeTab === key;
-                          return (
-                            <button
-                              id={`tab-btn-${key}`}
-                              key={key}
-                              onClick={() => setActiveTab(key)}
-                              className={`relative py-2.5 px-4 font-bold text-xs tracking-wide rounded-t-xl transition-all border-b-2 cursor-pointer ${
-                                isActive 
-                                  ? activeTheme.tabActive 
-                                  : `${activeTheme.tabInactive} ${activeTheme.tabHover}`
-                              }`}
-                            >
-                              {t.tabs[key]}
-                              {isActive && (
-                                <motion.div
-                                  layoutId="activeTabIndicator"
-                                  className={`absolute bottom-0 left-0 right-0 h-0.5 ${
-                                    themeKey === 'dark' ? 'bg-indigo-500' : themeKey === 'sage' ? 'bg-emerald-700' : themeKey === 'retro' ? 'bg-stone-900' : 'bg-sky-600'
-                                  }`}
-                                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                />
-                              )}
-                            </button>
-                          );
-                        })}
-                      </nav>
-                    </div>
-
-                    <div className="pt-2 min-h-40 relative overflow-hidden">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={activeTab}
-                          initial={{ opacity: 0, x: 10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -10 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          {/* Verification Tab */}
-                          {activeTab === "verification" && (
-                            <div className="space-y-4">
-                              <div className={`text-sm leading-relaxed whitespace-pre-line rounded-xl p-4 border ${
-                                themeKey === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200/50'
-                              }`}>
-                                {result.data.claimVerification}
-                              </div>
-
-                              {/* Search Grounding info box */}
-                              <div className={`rounded-xl p-4 flex items-start gap-3 border ${
-                                themeKey === 'dark' ? 'bg-emerald-950/20 border-emerald-900/30' : 'bg-emerald-50/50 border-emerald-100'
-                              }`}>
-                                <div className="p-1.5 bg-emerald-100 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-400 rounded-md shrink-0">
-                                  <ShieldCheck className="w-4 h-4" />
-                                </div>
-                                <div>
-                                  <span className="text-xs font-extrabold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider block">{t.googleGrounded}</span>
-                                  <p className={`text-xs mt-1 ${activeTheme.neutralMuted}`}>
-                                    Informasi diverifikasi langsung dengan bantuan mesin penelusur Google Search untuk membandingkan klaim dengan korpus berita tepercaya global & lokal (Snopes, AFP, Tempo, dll).
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Source Credibility Tab */}
-                          {activeTab === "credibility" && (
-                            <div className="space-y-4">
-                              <h4 className="text-sm font-extrabold">{t.reputationAnalyzed}</h4>
-                              <div className={`text-sm leading-relaxed rounded-xl p-4 border ${
-                                themeKey === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200/50'
-                              }`}>
-                                {result.data.sourceCredibility}
-                              </div>
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                                <div className={`border rounded-lg p-3 text-xs ${
-                                  themeKey === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200/70'
-                                }`}>
-                                  <span className="font-bold text-slate-500 dark:text-slate-400 block mb-1">Status Keamanan Domain:</span>
-                                  <span className="opacity-95">Domain dinilai berdasarkan riwayat penyebaran hoaks dan afiliasi editorial resmi.</span>
-                                </div>
-                                <div className={`border rounded-lg p-3 text-xs ${
-                                  themeKey === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-white border-slate-200/70'
-                                }`}>
-                                  <span className="font-bold text-slate-500 dark:text-slate-400 block mb-1">Transparansi Penulis:</span>
-                                  <span className="opacity-95">Analisis menyelidiki keberadaan atribusi jurnalis dan penanggung jawab redaksi.</span>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Propaganda Detection Tab */}
-                          {activeTab === "propaganda" && (
-                            <div className="space-y-3">
-                              {result.data.propagandaDetection && result.data.propagandaDetection.length > 0 ? (
-                                result.data.propagandaDetection.map((prop, index) => (
-                                  <motion.div 
-                                    key={index} 
-                                    className="border border-rose-100 dark:border-rose-950/40 rounded-xl p-4 bg-rose-50/30 dark:bg-rose-950/10"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.05 }}
-                                  >
-                                    <span className="text-xs font-black text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 px-2 py-0.5 rounded border border-rose-200 dark:border-rose-900/40">
-                                      {prop.technique}
-                                    </span>
-                                    <p className="text-sm mt-2 font-medium">
-                                      {prop.explanation}
-                                    </p>
-                                  </motion.div>
-                                ))
-                              ) : (
-                                <div className="text-center py-8 text-slate-400 text-sm">
-                                  <BookOpen className="w-8 h-8 mx-auto mb-2 text-slate-300" />
-                                  {t.propagandaEmpty}
-                                </div>
-                              )}
-                            </div>
-                          )}
-
-                          {/* Bias Analysis Tab */}
-                          {activeTab === "bias" && (
-                            <div className="space-y-4">
-                              <div className="flex items-center gap-3">
-                                <span className="text-xs font-extrabold uppercase tracking-wider">Kategori Bias:</span>
-                                <span className={`text-xs font-black px-3 py-1 rounded-full ${
-                                  themeKey === 'dark' ? 'bg-indigo-950 text-indigo-300 border border-indigo-900/40' : 'bg-sky-100 text-sky-800'
-                                }`}>
-                                  {result.data.biasAnalysis.rating}
-                                </span>
-                              </div>
-                              <div className={`text-sm leading-relaxed rounded-xl p-4 border ${
-                                themeKey === 'dark' ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200/50'
-                              }`}>
-                                {result.data.biasAnalysis.explanation}
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Suggestions Tab */}
-                          {activeTab === "suggestions" && (
-                            <div className="space-y-3">
-                              {result.data.suggestions.map((sug, idx) => (
-                                <motion.div 
-                                  key={idx} 
-                                  className={`flex items-start gap-2.5 p-3 rounded-lg border text-xs ${
-                                    themeKey === 'dark' ? 'bg-slate-950 border-slate-850' : 'bg-slate-50 border-slate-100'
-                                  }`}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: idx * 0.05 }}
-                                >
-                                  <div className={`p-1 rounded-full mt-0.5 shrink-0 ${
-                                    themeKey === 'dark' ? 'bg-indigo-950 text-indigo-400' : 'bg-sky-100 text-sky-700'
-                                  }`}>
-                                    <Check className="w-3.5 h-3.5" />
-                                  </div>
-                                  <span className="opacity-95">{sug}</span>
-                                </motion.div>
-                              ))}
-                            </div>
-                          )}
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-                  </div>
-
-                  {/* SEARCH GROUNDING & SOURCES DETAILED VIEW */}
-                  <div className="border-t border-slate-100 dark:border-slate-800/80 pt-6 space-y-4">
-                    {/* Web Queries Run */}
-                    {result.queries && result.queries.length > 0 && (
-                      <div className="space-y-2">
-                        <span className={`text-xs font-extrabold uppercase tracking-wider flex items-center gap-1.5 ${activeTheme.neutralMuted}`}>
-                          <Search className="w-3.5 h-3.5 text-slate-500" />
-                          {t.searchQueries}
-                        </span>
-                        <div className="flex flex-wrap gap-2">
-                          {result.queries.map((q, idx) => (
-                            <span key={idx} className={`text-xs px-3 py-1 rounded-lg border font-mono ${
-                              themeKey === 'dark' ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-600'
-                            }`}>
-                              "{q}"
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Grounded Web references */}
-                    <div className="space-y-2">
-                      <span className={`text-xs font-extrabold uppercase tracking-wider block ${activeTheme.neutralMuted}`}>
-                        {t.sourcesFound}
-                      </span>
-                      {result.sources && result.sources.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                          {result.sources.map((src, index) => (
-                            <motion.a
-                              key={index}
-                              href={src.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`p-3 border rounded-xl flex items-start justify-between group min-w-0 ${
-                                themeKey === 'dark' 
-                                  ? 'bg-slate-900 border-slate-800 hover:border-indigo-500 hover:bg-indigo-950/10' 
-                                  : themeKey === 'sage'
-                                  ? 'bg-white border-emerald-150 hover:border-emerald-300 hover:bg-emerald-50/20'
-                                  : themeKey === 'retro'
-                                  ? 'bg-[#faf8f3] border-stone-300 hover:border-stone-500 hover:bg-stone-200/20'
-                                  : 'bg-white border-slate-200 hover:border-sky-300 hover:bg-sky-50/20'
-                              } transition-all duration-200`}
-                              whileHover={{ scale: 1.01 }}
-                              whileTap={{ scale: 0.99 }}
-                            >
-                              <div className="space-y-1.5 min-w-0 flex-1">
-                                <p className={`text-xs font-extrabold line-clamp-2 leading-snug group-hover:text-indigo-400 ${
-                                  themeKey === 'dark' ? 'text-slate-100' : 'text-slate-800'
-                                }`}>
-                                  {src.title || "Rujukan Valid"}
-                                </p>
-                                <div className="flex items-center gap-1.5 text-[10px] min-w-0">
-                                  <span className={`border font-semibold px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wider shrink-0 ${
-                                    themeKey === 'dark'
-                                      ? 'bg-indigo-950/40 text-indigo-300 border-indigo-900/40'
-                                      : 'bg-sky-50 text-sky-700 border-sky-100'
-                                  }`}>
-                                    {(() => {
-                                      try {
-                                        const u = new URL(src.url);
-                                        return u.hostname.replace('news.', '').replace('www.', '');
-                                      } catch {
-                                        return 'Source';
-                                      }
-                                    })()}
-                                  </span>
-                                  <span className="text-slate-400 font-mono truncate flex-1" title={src.url}>
-                                    {src.url}
-                                  </span>
-                                </div>
-                              </div>
-                              <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-600 shrink-0 ml-2 mt-0.5" />
-                            </motion.a>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-xs text-slate-400 italic">
-                          {t.noSources}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                </motion.div>
-              ) : (
-                <motion.div 
-                  className={`${activeTheme.cardBg} border ${activeTheme.cardBorder} rounded-2xl p-10 text-center shadow-sm`}
-                  key="no-data"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <ShieldCheck className="w-16 h-16 text-slate-300 dark:text-slate-700 mx-auto mb-4" />
-                  <h3 className="text-base font-bold">Verifikasi Berita Instan</h3>
-                  <p className={`text-sm max-w-sm mx-auto mt-2 ${activeTheme.neutralMuted}`}>
-                    {t.noDataYet}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* INTEGRATION GUIDE SECTION */}
-            <motion.div 
-              className={`text-white rounded-2xl shadow-lg p-6 overflow-hidden relative ${
-                themeKey === 'dark' ? 'bg-linear-to-br from-indigo-950 to-slate-900 border border-slate-800' : 'bg-slate-900'
-              }`}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="absolute right-0 top-0 translate-x-12 -translate-y-12 w-64 h-64 bg-sky-600/10 rounded-full blur-2xl pointer-events-none" />
-              <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div>
-                  <span className="text-xs font-extrabold text-sky-400 uppercase tracking-wider block mb-1">Fact-checking Network</span>
-                  <h3 className="text-lg font-black tracking-tight">Konektivitas Snopes, Tempo & AFP Fact Check</h3>
-                  <p className="text-xs text-slate-300 mt-1.5 max-w-xl leading-relaxed">
-                    Sistem kami memanfaatkan Google Search Grounding untuk menjembatani pemeriksaan klaim langsung dengan data terkini dari situs global seperti <strong>Snopes.com</strong>, <strong>AFP Fact Check</strong>, dan jaringan penangkal hoaks lokal Indonesia seperti <strong>Mafindo (TurnBackHoax)</strong> dan <strong>CekFakta</strong>.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-2 shrink-0">
-                  <span className="text-[10px] bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded font-bold">Snopes Connected</span>
-                  <span className="text-[10px] bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded font-bold">AFP Fact Check API</span>
-                  <span className="text-[10px] bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded font-bold">CekFakta / Mafindo</span>
-                </div>
               </div>
             </motion.div>
+          )}
 
+          {/* LOADING & RESULTS CONTAINER */}
+          <AnimatePresence mode="wait">
+            {isAnalyzing ? (
+              <motion.div 
+                className="bg-[#111827] border border-slate-800 rounded-2xl p-12 text-center shadow-2xl shadow-slate-950/45 min-h-[250px] flex flex-col items-center justify-center space-y-4"
+                key="analyzing-state"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+              >
+                <RefreshCw className="w-8 h-8 animate-spin text-blue-400" />
+                <div>
+                  <span className="font-mono text-xs uppercase tracking-widest block font-bold text-blue-400 mb-1">[ {lang === 'id' ? 'SEDANG MEMPROSES' : 'PROCESSING'} ]</span>
+                  <p className="text-sm max-w-sm mx-auto text-slate-300 leading-relaxed">
+                    {lang === 'id' 
+                      ? 'Membandingkan klaim dengan korpus berita global terpercaya & database pencarian Google real-time...' 
+                      : 'Verifying claim integrity against Google Search corpus & international fact check databases...'}
+                  </p>
+                </div>
+              </motion.div>
+            ) : result ? (
+              <motion.div 
+                className="bg-[#111827] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-slate-950/50 space-y-6 transition-all duration-300" 
+                id="analysis-results"
+                key="analysis-results"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4 }}
+              >
+                {/* Analysis Report Title */}
+                <div className="border-b border-slate-800 pb-4 flex justify-between items-baseline">
+                  <span className="font-mono text-[10px] uppercase tracking-widest font-bold text-slate-400">
+                    [ {t.resultsTitle} ]
+                  </span>
+                  <span className="font-mono text-[9px] text-slate-500">
+                    REF ID: #{(Math.floor(Math.random() * 90000) + 10000)}
+                  </span>
+                </div>
+
+                {/* Stamp & Verification Score layout */}
+                <div className="flex flex-col sm:flex-row gap-6 justify-between items-start sm:items-center py-2">
+                  <div className="flex items-center gap-4">
+                    {/* Badge representation of veracity */}
+                    <div className="shrink-0 p-3 bg-[#0B0F19] border border-slate-800 rounded-xl">
+                      {result.data.credibilityScore >= 75 ? (
+                        <CheckCircle className="w-10 h-10 text-emerald-500" />
+                      ) : result.data.credibilityScore >= 45 ? (
+                        <AlertTriangle className="w-10 h-10 text-amber-500" />
+                      ) : (
+                        <ShieldAlert className="w-10 h-10 text-rose-500" />
+                      )}
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono uppercase tracking-widest block text-slate-400">{t.overallRating}</span>
+                      <div className="mt-1 flex items-center">
+                        <span className={`px-3 py-1 font-mono text-xs uppercase tracking-wider border rounded-lg font-bold ${getRatingBadgeColor(result.data.rating)}`}>
+                          [ {result.data.rating} ]
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* SCORE Stamp Gauge */}
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <span className="text-[10px] font-mono uppercase tracking-widest block text-slate-400">{t.credibilityScore}</span>
+                      <span className="text-3xl font-sans font-extrabold tracking-tight text-white">{result.data.credibilityScore} <span className="text-xs font-mono font-normal text-slate-500">/ 100</span></span>
+                    </div>
+                    <div className="relative w-12 h-12 flex items-center justify-center shrink-0">
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle
+                          cx="24"
+                          cy="24"
+                          r="20"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          className="text-slate-800"
+                          fill="transparent"
+                        />
+                        <motion.circle
+                          cx="24"
+                          cy="24"
+                          r="20"
+                          stroke={
+                            result.data.credibilityScore >= 75 ? "#10b981" : result.data.credibilityScore >= 45 ? "#f59e0b" : "#ef4444"
+                          }
+                          strokeWidth="3"
+                          fill="transparent"
+                          strokeDasharray={2 * Math.PI * 20}
+                          initial={{ strokeDashoffset: 2 * Math.PI * 20 }}
+                          animate={{ strokeDashoffset: 2 * Math.PI * 20 * (1 - result.data.credibilityScore / 100) }}
+                          transition={{ duration: 1.0, ease: "easeOut" }}
+                        />
+                      </svg>
+                      <span className="absolute font-mono text-[9px] font-bold text-slate-300">%</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* EXECUTIVE SUMMARY */}
+                <motion.div 
+                  className="bg-blue-500/5 border border-blue-500/15 p-4 border-l-4 border-l-blue-500 rounded-r-xl"
+                  initial={{ scale: 0.99, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <h4 className="font-mono text-[10px] uppercase tracking-wider mb-2.5 flex items-center gap-1.5 font-bold text-blue-400">
+                    <Info className="w-3.5 h-3.5" />
+                    {t.summary}
+                  </h4>
+                  <p className="text-sm leading-relaxed font-medium italic text-slate-100">
+                    "{result.data.summary}"
+                  </p>
+                </motion.div>
+
+                {/* FOUR PILLARS TABBED SECTION */}
+                <div className="space-y-4">
+                  <div className="border-b border-slate-800">
+                    <nav className="flex flex-wrap -mb-px gap-1.5 pb-2">
+                      {Object.keys(t.tabs).map((tabKey) => {
+                        const key = tabKey as keyof typeof t.tabs;
+                        const isActive = activeTab === key;
+                        return (
+                          <button
+                            id={`tab-btn-${key}`}
+                            key={key}
+                            onClick={() => setActiveTab(key)}
+                            className={`py-2 px-3 font-mono text-[10px] uppercase tracking-wider border rounded-lg cursor-pointer transition-all duration-150 ${
+                              isActive 
+                                ? `${activeTheme.tabActive} border-blue-500/30` 
+                                : `${activeTheme.tabInactive} border-transparent`
+                            }`}
+                          >
+                            {t.tabs[key]}
+                          </button>
+                        );
+                      })}
+                    </nav>
+                  </div>
+
+                  <div className="pt-2 min-h-[140px] relative overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        {/* Verification Tab */}
+                        {activeTab === "verification" && (
+                          <div className="space-y-4">
+                            <div className="text-sm leading-relaxed font-sans whitespace-pre-line p-4 border border-slate-800 rounded-xl bg-[#0B0F19]/50 text-slate-200">
+                              {result.data.claimVerification}
+                            </div>
+
+                            {/* Search Grounding info box */}
+                            <div className="p-4 flex items-start gap-3 border border-blue-500/10 bg-blue-500/5 rounded-xl">
+                              <div className="p-1.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-lg shrink-0 mt-0.5">
+                                <ShieldCheck className="w-3.5 h-3.5" />
+                              </div>
+                              <div>
+                                <span className="text-[10px] font-mono font-bold uppercase tracking-wider block text-blue-300">{t.googleGrounded}</span>
+                                <p className="text-xs mt-1 leading-relaxed text-slate-400">
+                                  Informasi diverifikasi langsung dengan bantuan mesin penelusur Google Search untuk membandingkan klaim dengan korpus berita tepercaya global & lokal (Snopes, AFP, Tempo, dll).
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Source Credibility Tab */}
+                        {activeTab === "credibility" && (
+                          <div className="space-y-4">
+                            <h4 className="text-xs font-mono uppercase tracking-wider font-bold text-slate-400">{t.reputationAnalyzed}</h4>
+                            <div className="text-sm leading-relaxed font-sans p-4 border border-slate-800 rounded-xl bg-[#0B0F19]/50 text-slate-200">
+                              {result.data.sourceCredibility}
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                              <div className="border border-slate-800 rounded-xl p-4 text-xs bg-[#0B0F19]/30">
+                                <span className="font-mono font-bold block mb-1 text-slate-400">Status Keamanan Domain:</span>
+                                <span className="text-slate-400 leading-relaxed">Domain dinilai berdasarkan riwayat penyebaran hoaks dan afiliasi editorial resmi.</span>
+                              </div>
+                              <div className="border border-slate-800 rounded-xl p-4 text-xs bg-[#0B0F19]/30">
+                                <span className="font-mono font-bold block mb-1 text-slate-400">Transparansi Penulis:</span>
+                                <span className="text-slate-400 leading-relaxed">Analisis menyelidiki keberadaan atribusi jurnalis dan penanggung jawab redaksi.</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Propaganda Detection Tab */}
+                        {activeTab === "propaganda" && (
+                          <div className="space-y-3">
+                            {result.data.propagandaDetection && result.data.propagandaDetection.length > 0 ? (
+                              result.data.propagandaDetection.map((prop, index) => (
+                                <motion.div 
+                                  key={index} 
+                                  className="border border-slate-800 rounded-xl p-4 bg-slate-900/40 hover:bg-slate-900/70 transition-all"
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  transition={{ delay: index * 0.05 }}
+                                >
+                                  <span className="text-[10px] font-mono font-bold text-rose-400 bg-rose-500/5 px-2 py-0.5 border border-rose-500/10 rounded-md">
+                                    {prop.technique}
+                                  </span>
+                                  <p className="text-sm mt-2 text-slate-300 leading-relaxed">
+                                    {prop.explanation}
+                                  </p>
+                                </motion.div>
+                              ))
+                            ) : (
+                              <div className="text-center py-8 text-slate-500 text-sm">
+                                <BookOpen className="w-8 h-8 mx-auto mb-2 text-slate-600" />
+                                {t.propagandaEmpty}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Bias Analysis Tab */}
+                        {activeTab === "bias" && (
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-3">
+                              <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-400">Kategori Bias:</span>
+                              <span className="text-[10px] font-mono border border-blue-500/20 font-bold px-2.5 py-0.5 uppercase tracking-wide bg-blue-500/5 text-blue-400 rounded-md">
+                                {result.data.biasAnalysis.rating}
+                              </span>
+                            </div>
+                            <div className="text-sm leading-relaxed font-sans p-4 border border-slate-800 rounded-xl bg-[#0B0F19]/50 text-slate-200 font-medium">
+                              {result.data.biasAnalysis.explanation}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Suggestions Tab */}
+                        {activeTab === "suggestions" && (
+                          <div className="space-y-3">
+                            {result.data.suggestions.map((sug, idx) => (
+                              <motion.div 
+                                key={idx} 
+                                className="flex items-start gap-2.5 p-3.5 border border-slate-800 rounded-xl bg-slate-900/40 text-xs text-slate-300"
+                                initial={{ opacity: 0, x: -5 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: idx * 0.04 }}
+                              >
+                                <div className="p-0.5 rounded-full mt-0.5 shrink-0 bg-blue-500/10 text-blue-400 border border-blue-500/25">
+                                  <Check className="w-3 h-3" />
+                                </div>
+                                <span className="opacity-95 leading-relaxed">{sug}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+                {/* SEARCH GROUNDING & SOURCES DETAILED VIEW */}
+                <div className="border-t border-slate-800 pt-6 space-y-4">
+                  {/* Web Queries Run */}
+                  {result.queries && result.queries.length > 0 && (
+                    <div className="space-y-2">
+                      <span className="text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5 text-slate-400">
+                        <Search className="w-3 h-3 text-blue-400" />
+                        {t.searchQueries}
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {result.queries.map((q, idx) => (
+                          <span key={idx} className="text-[10px] px-2.5 py-1 border border-slate-800 font-mono bg-slate-900/80 rounded-lg text-slate-300">
+                            "{q}"
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Grounded Web references */}
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-mono uppercase tracking-widest block text-slate-400">
+                      [ {t.sourcesFound} ]
+                    </span>
+                    {result.sources && result.sources.length > 0 ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        {result.sources.map((src, index) => (
+                          <motion.a
+                            key={index}
+                            href={src.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3 border border-slate-800 flex items-start justify-between group rounded-xl bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/90 transition-all duration-200"
+                            whileHover={{ scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
+                          >
+                            <div className="space-y-1.5 min-w-0 flex-1">
+                              <p className="text-xs font-sans font-bold line-clamp-2 leading-snug text-slate-200 group-hover:underline group-hover:text-blue-400">
+                                {src.title || "Rujukan Valid"}
+                              </p>
+                              <div className="flex items-center gap-1.5 text-[10px] min-w-0">
+                                <span className="border border-blue-500/10 font-mono font-bold px-1.5 py-0.5 rounded text-[8px] uppercase tracking-wider shrink-0 bg-blue-500/5 text-blue-400">
+                                  {(() => {
+                                    try {
+                                      const u = new URL(src.url);
+                                      return u.hostname.replace('news.', '').replace('www.', '');
+                                    } catch {
+                                      return 'Source';
+                                    }
+                                  })()}
+                                </span>
+                                <span className="text-slate-500 font-mono truncate flex-1" title={src.url}>
+                                  {src.url}
+                                </span>
+                              </div>
+                            </div>
+                            <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 shrink-0 ml-2 mt-0.5" />
+                          </motion.a>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-xs text-slate-500 italic">
+                        {t.noSources}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </div>
+
+        {/* FULL-WIDTH TRUST BANNER MATCHING MOCKUP */}
+        <section className="border border-slate-800/80 bg-[#111827] py-6 px-6 sm:px-8 mt-12 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-xl shadow-slate-950/20">
+          <div className="max-w-2xl">
+            <span className="block font-mono text-[9px] uppercase tracking-widest font-bold mb-1.5 text-blue-400">
+              [ Truth Network ]
+            </span>
+            <h4 className="font-sans font-bold text-2xl tracking-tight mb-2 text-white">
+              Snopes, Tempo & AFP Connectivity
+            </h4>
+            <p className="text-sm leading-relaxed text-slate-400 font-sans">
+              Sistem memanfaatkan Google Search Grounding untuk menjembatani data global dan lokal dari <strong>Snopes.com</strong>, <strong>AFP Fact Check</strong>, serta jaringan penangkal hoaks nasional <strong>Mafindo (TurnBackHoax)</strong> dan <strong>CekFakta</strong>.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 shrink-0">
+            <span className="font-mono text-[9px] uppercase tracking-wider bg-slate-900/80 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-lg shadow-sm font-semibold">Snopes API</span>
+            <span className="font-mono text-[9px] uppercase tracking-wider bg-slate-900/80 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-lg shadow-sm font-semibold">AFP Fact</span>
+            <span className="font-mono text-[9px] uppercase tracking-wider bg-slate-900/80 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-lg shadow-sm font-semibold">CekFakta</span>
+          </div>
+        </section>
       </main>
 
-      {/* FOOTER */}
-      <footer className={`${activeTheme.footerBg} py-8 transition-colors duration-300`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium">
-          <p className={activeTheme.footerText}>© 2026 VerifikasiAI. All Rights Reserved. Built securely using Google Gemini 3.5 & Google Search Grounding.</p>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-sky-500" /> Snopes Connected</span>
-            <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-sky-500" /> AFP Verified</span>
-            <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-sky-500" /> Mafindo Grounded</span>
+      {/* FOOTER MATCHING MOCKUP */}
+      <footer className="mt-16 border-t border-current/30 pt-8 pb-12 font-mono text-[10px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="opacity-75">
+            © 2026 VERIFIKASIAI / BUILT WITH GOOGLE GEMINI 3.5 & SEARCH GROUNDING
+          </p>
+          <div className="flex flex-wrap items-center gap-4 opacity-80">
+            <span>[ SNOPES CONNECTED ]</span>
+            <span>[ AFP VERIFIED ]</span>
+            <span>[ MAFINDO GROUNDED ]</span>
           </div>
         </div>
       </footer>
