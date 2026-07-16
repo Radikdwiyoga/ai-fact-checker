@@ -29,6 +29,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { Analytics } from '@vercel/analytics/react';
 import { FactCheckData, GroundingSource, RatingType } from "./types";
 
 // Standard Example prompts
@@ -1000,6 +1001,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
