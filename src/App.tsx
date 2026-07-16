@@ -166,21 +166,16 @@ export default function App() {
     }
   };
 
-  // Helper to determine color badge based on rating
+// Helper to determine color badge based on rating
   const getRatingBadgeColor = (rating: RatingType) => {
-    const r = rating?.toLowerCase() || "";
-    if (r.includes("trusted") || r.includes("credible")) {
-      return "bg-emerald-50 text-emerald-700 border-emerald-200";
-    }
-    if (r.includes("mixed") || r.includes("unverified")) {
-      return "bg-amber-50 text-amber-700 border-amber-200";
-    }
-    if (r.includes("disputed") || r.includes("misleading") || r.includes("false")) {
+    if (rating.includes("disputed") || rating.includes("misleading") || rating.includes("false")) {
       return "bg-rose-50 text-rose-700 border-rose-200";
+    }
+    if (rating.includes("partially") || rating.includes("mixed")) {
+      return "bg-amber-50 text-amber-700 border-amber-200";
     }
     return "bg-slate-50 text-slate-700 border-slate-200";
   };
-
   return (
     <div className="min-h-screen bg-[#f8fafc] text-slate-900 font-sans antialiased">
       {/* HEADER SECTION */}
@@ -230,7 +225,7 @@ export default function App() {
       </header>
 
       {/* HERO HERO SECTION */}
-      <div className="bg-gradient-to-b from-sky-50 via-white to-transparent py-10 px-4">
+      <div className="bg-linear-to-b from-sky-50 via-white to-transparent py-10 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 leading-tight">
             {t.title}
@@ -264,7 +259,7 @@ export default function App() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <div className="relative flex-grow">
+                  <div className="relative grow">
                     <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                       <Globe className="w-4 h-4" />
                     </div>
@@ -449,7 +444,7 @@ export default function App() {
                     </nav>
                   </div>
 
-                  <div className="pt-2 min-h-[160px]">
+                  <div className="pt-2 min-h-40">
                     {/* Verification Tab */}
                     {activeTab === "verification" && (
                       <div className="space-y-4">
@@ -578,17 +573,29 @@ export default function App() {
                             href={src.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-white border border-slate-200 rounded-xl hover:border-sky-300 hover:bg-sky-50/20 transition-all flex items-start justify-between group"
+                            className="p-3 bg-white border border-slate-200 rounded-xl hover:border-sky-300 hover:bg-sky-50/20 transition-all flex items-start justify-between group min-w-0"
                           >
-                            <div className="space-y-1">
-                              <p className="text-xs font-extrabold text-slate-800 line-clamp-1 group-hover:text-sky-700">
+                            <div className="space-y-1.5 min-w-0 flex-1">
+                              <p className="text-xs font-extrabold text-slate-800 line-clamp-2 group-hover:text-sky-700 leading-snug">
                                 {src.title || "Rujukan Valid"}
                               </p>
-                              <p className="text-[10px] text-slate-400 font-mono line-clamp-1">
-                                {src.url}
-                              </p>
+                              <div className="flex items-center gap-1.5 text-[10px]">
+                                <span className="bg-sky-50 text-sky-700 border border-sky-100 font-semibold px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wider shrink-0">
+                                  {(() => {
+                                    try {
+                                      const u = new URL(src.url);
+                                      return u.hostname.replace('news.', '').replace('www.', '');
+                                    } catch {
+                                      return 'Source';
+                                    }
+                                  })()}
+                                </span>
+                                <span className="text-slate-400 font-mono truncate flex-1" title={src.url}>
+                                  {src.url}
+                                </span>
+                              </div>
                             </div>
-                            <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-600 shrink-0 ml-2" />
+                            <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-sky-600 shrink-0 ml-2 mt-0.5" />
                           </a>
                         ))}
                       </div>

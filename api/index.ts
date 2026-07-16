@@ -164,7 +164,29 @@ async function fetchRealtimeSearchResults(query: string): Promise<Array<{ title:
           .trim();
       }
       
-      let snippet = `Berita dari ${source || "Media Terpercaya"} pada ${pubDate || "baru-baru ini"}.`;
+      // Extract real news article summary from <description> tag
+      let snippetText = "";
+      const descMatch = item.match(/<description>([\s\S]*?)<\/description>/);
+      if (descMatch) {
+        snippetText = descMatch[1]
+          .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+          .replace(/<[^>]*>/g, "") // strip HTML tags
+          .replace(/&nbsp;/g, " ")
+          .replace(/&amp;/g, "&")
+          .replace(/&quot;/g, '"')
+          .replace(/&#39;/g, "'")
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      let snippet = snippetText;
+      if (!snippet) {
+        snippet = `Berita tentang topik terkait dari ${source || "Media Terpercaya"} pada ${pubDate || "baru-baru ini"}.`;
+      } else {
+        snippet = `${snippet} (Sumber: ${source || "Media Terpercaya"}, ${pubDate || "baru-baru ini"})`;
+      }
       
       if (title && linkUrl) {
         results.push({ title, url: linkUrl, snippet });
@@ -177,33 +199,100 @@ async function fetchRealtimeSearchResults(query: string): Promise<Array<{ title:
   }
 }
 
+async function getSmartSearchQueries(text: string, language: string = "id"): Promise<string[]> {
+  const isID = language === "id";
+  const rawQuery = cleanSearchQuery(text);
+  if (!rawQuery) return [];
+
+  const queriesToSearch: string[] = [];
+
+  // Try to use Gemini model to extract clean keyword search queries
+  try {
+    const ai = getGeminiClient();
+    const extractionPrompt = `You are an expert search engine query optimizer.
+Analyze this news text or social media claim, and generate 2 to 3 distinct, highly optimized Google search queries (keywords only, 2-5 words each) to check its factual accuracy and find relevant news coverage.
+Do NOT include any clickbait or emotional words (such as "waspada", "heboh", "viral", "breaking news", "gempar", "hoax", "palsu").
+Focus purely on proper nouns, subjects, entities, and core factual assertions.
+
+Text to analyze:
+"${text}"
+
+Return ONLY a JSON array of strings. Example format:
+["Inggris vs Norwegia 2026", "hasil pertandingan Inggris Norwegia", "piala dunia inggris norwegia"]`;
+
+    const response = await generateContentWithModelFallback(ai, {
+      contents: extractionPrompt,
+      config: {
+        systemInstruction: "You are a JSON parser. Output strictly a JSON array of strings.",
+        responseMimeType: "application/json",
+      },
+    });
+
+    const parsed = JSON.parse(response.text || "[]");
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      console.log("[API Search] Successfully extracted search queries using Gemini:", parsed);
+      return parsed.map(q => q.trim()).filter(q => q.length > 3);
+    }
+  } catch (err: any) {
+    console.warn("[API Search] Gemini search query extraction failed or rate limited, falling back to heuristic extraction:", err.message || err);
+  }
+
+  // HEURISTIC / REGEX-BASED FALLBACK (Extremely robust!)
+  // 1. Base query from cleaned text
+  let baseQuery = rawQuery;
+  
+  // Clean clickbait words
+  const clickbaitRegex = /waspada|heboh|viral|breaking\s*news|breaking|gempar|mencekam|sebarkan|segera|penting|wajib\s*tahu|kabar\s*gembira|bocor|pesan\s*berantai|detik-detik|gempar|hoax|hoaks|palsu|fitnah|disinformasi|klarifikasi|mengejutkan|gempar|heboh/gi;
+  baseQuery = baseQuery.replace(clickbaitRegex, "").replace(/\s+/g, " ").trim();
+
+  // Extract capitalized words / proper nouns (highly likely to be entities!)
+  const properNouns = rawQuery.match(/[A-Z][a-z]+/g) || [];
+  const uniqueProperNouns = Array.from(new Set(properNouns)).filter(n => n.length > 2);
+  
+  // Get high-value words (nouns/verbs, longer words)
+  const stopWords = new Set(["pada", "yang", "dengan", "dan", "dari", "untuk", "dalam", "bisa", "adalah", "akan", "telah", "sudah", "belum", "oleh", "sebagai", "bahwa", "ini", "itu", "ke", "di", "the", "and", "of", "to", "in", "for", "with", "on", "at", "by", "an", "is", "that", "this", "it"]);
+  const words = baseQuery
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g, " ")
+    .split(/\s+/)
+    .filter(w => w.length >= 3 && !stopWords.has(w.toLowerCase()));
+
+  // Query 1: Cleaned base words (first 6 words)
+  const query1 = words.slice(0, 6).join(" ");
+  if (query1 && query1.length > 3) {
+    queriesToSearch.push(query1);
+  }
+
+  // Query 2: Proper nouns / Entities
+  if (uniqueProperNouns.length >= 2) {
+    queriesToSearch.push(uniqueProperNouns.slice(0, 4).join(" "));
+  }
+
+  // Query 3: Core subjects + "cek fakta" or "fact check"
+  const factCheckKeyword = isID ? "cek fakta" : "fact check";
+  if (words.length >= 2) {
+    queriesToSearch.push(`${words.slice(0, 3).join(" ")} ${factCheckKeyword}`);
+  }
+
+  // Query 4: Core subjects + current year
+  const currentYear = new Date().getFullYear().toString(); // "2026"
+  if (words.length >= 2) {
+    queriesToSearch.push(`${words.slice(0, 3).join(" ")} ${currentYear}`);
+  }
+
+  // Deduplicate and filter empty queries
+  const finalQueries = Array.from(new Set(queriesToSearch))
+    .map(q => q.trim())
+    .filter(q => q.length > 3)
+    .slice(0, 3); // Max 3 parallel queries
+
+  console.log("[API Search] Heuristic search queries extracted:", finalQueries);
+  return finalQueries;
+}
+
 async function getEnhancedSearchResults(text: string): Promise<Array<{ title: string; url: string; snippet: string }>> {
   try {
-    const rawQuery = cleanSearchQuery(text);
-    if (!rawQuery) return [];
-    
-    const queriesToSearch = [rawQuery];
-    
-    // Create a keyword version to bypass overly long strings or complex punctuation
-    const keywordQuery = rawQuery
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g, "")
-      .split(/\s+/)
-      .slice(0, 8)
-      .join(" ");
-      
-    // If the keyword version is different and valid, add it
-    if (keywordQuery && keywordQuery !== rawQuery) {
-      queriesToSearch.push(keywordQuery);
-    }
-    
-    // Inject the current year 2026 to ensure fresh and relevant news (e.g. "Inggris vs Norwegia 2026")
-    const currentYear = new Date().getFullYear().toString(); // "2026"
-    if (!rawQuery.includes(currentYear) && keywordQuery) {
-      queriesToSearch.push(`${keywordQuery} ${currentYear}`);
-    }
-    
-    // Deduplicate query list
-    const uniqueQueries = Array.from(new Set(queriesToSearch.filter(q => q.length > 3)));
+    const uniqueQueries = await getSmartSearchQueries(text);
+    if (uniqueQueries.length === 0) return [];
     
     console.log(`[API Search] Triggering enhanced parallel search queries:`, uniqueQueries);
     
